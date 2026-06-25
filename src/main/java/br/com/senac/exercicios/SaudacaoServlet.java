@@ -12,22 +12,22 @@ import java.io.IOException;
 public class SaudacaoServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
         resp.setContentType("text/html;charset=UTF-8");
 
-        String pathInfo = req.getPathInfo();
+        String name = req.getParameter("name");
         String mensagem;
-        String nome;
 
-        if (pathInfo == null || pathInfo.length() <= 1) {
+        if (name == null || name.length() <= 1) {
             mensagem = "<h1>olá visitante</h1>";
 
-        } else if (pathInfo.substring(1).length() <= 2) {
+        } else if (name.substring(1).length() <= 2) {
             mensagem = "<h1>Erro: nome deve ter ao menos 2 caracteres.</h1>";
 
         }else {
-            nome = pathInfo.substring(1);
-            mensagem = "<h1>Olá, " + nome + "</h1>";
+            mensagem = "<h1>Olá, " + name + "</h1>";
         }
 
         resp.getWriter().println(mensagem);
